@@ -908,7 +908,7 @@ c:
       break;
 
     case 16:
-      cout << "\n\t\t\t\t\t Brought To You By code-projects.org";
+      cout << "\n\t\t\t\t\t Thank You!!";
       exit(0);
       break;
 
