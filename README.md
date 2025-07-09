@@ -21,10 +21,20 @@ The **Hotel Management System** is designed to streamline hotel operations, maki
 - **Login Staff**: Manages staff login.
 - **Hotel**: Coordinates food orders and billing processes.
 
+## 🛠️ Tech Stack
+
+- **Language**: C++
+- **Concepts Used**:
+  - OOP: Classes, encapsulation, abstraction
+  - File Handling using `fstream`
+  - Conditional Logic and Loops
+  - Console-based UI with Menus
+
+
 ## Installation
 1. Clone the repository:
-   ```bash
-   git clone https://github.com/Diksha0416/OOPs_Project-main.git
+   ```git clone https://github.com/chitwan6804/hotel_management_project.git
+   cd hotel_management_project
    ```
 2. Navigate to the project directory:
    ```bash
