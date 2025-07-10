@@ -1,0 +1,44 @@
+--Queries used
+
+1. To Calculate Total Profit
+    with table1 as(
+      SELECT (SUM(ROOM_PRICE)+SUM(AMOUNT)) as total_income
+      FROM BOOKINGS JOIN ROOM 
+      ON BOOKINGS.ROOM_NUMBER=ROOM.ROOM_NUMBER 
+      JOIN ROOM_CATEGORY 
+      ON ROOM_CATEGORY.CATEGORY_ID=ROOM.TYPE_ID 
+      JOIN MEAL 
+      ON BOOKINGS.MEAL_ID=MEAL.MEAL_ID),
+    table2 as(
+      SELECT SUM(SALARY) as total_salaries 
+      FROM STAFF)
+
+    SELECT ROUND(((t1.total_income - t2.total_salaries)/t1.total_income)*100,2) as Profit_percentage
+    FROM table1 t1, table2 t2
+
+2. To Calculate Monthly Booking
+    SELECT MONTHS_STAYED, COUNT(MONTHS_STAYED)
+    FROM(
+    SELECT EXTRACT(MONTH FROM CHECKINDATE) AS MONTHS_STAYED 
+    FROM BOOKINGS)
+    GROUP BY MONTHS_STAYED
+    ORDER BY MONTHS_STAYED
+
+3. Total Online/Offline booking
+    SELECT COUNT(PAYMENT_MODE)
+    FROM BOOKINGS JOIN BILL 
+    ON BOOKINGS.BOOKING_ID=BILL.BOOKING_ID 
+    JOIN PAYMENT 
+    ON PAYMENT.PAYMENT_ID=BILL.PAYMENT_ID
+    GROUP BY PAYMENT_MODE
+
+4. Total Rooms in Hotel
+    SELECT COUNT(ROOM_NUMBER) FROM ROOM
+
+5. Average Number of Days Stayed
+    SELECT ceil(AVG(NO_OF_DAYS_STAYED)) AS AVG_DAYS_STAYED 
+    FROM(
+    SELECT TRUNC(CHECKOUTDATE-CHECKINDATE)AS NO_OF_DAYS_STAYED 
+    FROM BOOKINGS)
+
+

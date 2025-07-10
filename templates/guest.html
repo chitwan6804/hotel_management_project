@@ -1,0 +1,516 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Guest Table</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            /* height: 100vh; */
+            background-color: #f0f0f0;
+        }
+
+        table {
+            /* width: 70%; */
+            margin: 20px;
+            border-collapse: collapse;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            background-color: #fff;
+            margin-top: 5rem;
+        }
+
+        th,
+        td {
+            border: 1px solid #ddd;
+            padding: 12px;
+            text-align: left;
+        }
+
+        th {
+            background-color: #f2f2f2;
+        }
+
+        .delete-btn {
+            background-color: #e74c3c;
+            color: #fff;
+            border: none;
+            padding: 8px 12px;
+            cursor: pointer;
+            border-radius: 10px;
+        }
+
+        .add-btn {
+            background-color: #2ecc71;
+            color: #fff;
+            border: none;
+            padding: 10px;
+            cursor: pointer;
+            margin-bottom: 20px;
+            position: absolute;
+            top: 1rem;
+            border-radius: 10px;
+            width: 10rem;
+            font-size: 1rem;
+        }
+
+        /* Modal styling */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            justify-content: center;
+            align-items: center;
+        }
+
+        .modal-content {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 5px;
+            text-align: center;
+        }
+
+        .close-btn {
+            background-color: #999;
+            color: #fff;
+            border: none;
+            padding: 8px 12px;
+            cursor: pointer;
+        }
+
+        label {
+            gap: 1rem;
+        }
+    </style>
+</head>
+
+<body>
+
+    <table id="userTable">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Name</th>
+                <th>Date of Birth</th>
+                <th>Phone Number</th>
+                <th>Email</th>
+                <th>Address</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+        <tbody>
+            <!-- Sample Data -->
+            <tr>
+                <td>1</td>
+                <td>Ernest Barnes
+                </td>
+                <td>01-04-2012
+                </td>
+                <td>669-792-1661
+                </td>
+                <td>Ernest.Barnes31@outlook.com
+                </td>
+                <td>DELHI
+                </td>
+                <td><button class="delete-btn" onclick="deleteRow(this)">Delete</button></td>
+
+            </tr>
+            <tr>
+                <td>C002</td>
+                <td>Andrea Baker</td>
+                <td>09-07-1962</td>
+                <td>858-637-6955</td>
+                <td>Andrea_Baker94@aol.com</td>
+                <td>DELHI</td>
+                <td><button class="delete-btn" onclick="deleteRow(this)">Delete</button></td>
+            </tr>
+            <tr>
+                <td>C003</td>
+                <td>Rebecca Parker</td>
+                <td>09-06-2015</td>
+                <td>652-885-2745</td>
+                <td>Rebecca_Parker@comcast.net</td>
+                <td>CHANDIGARH</td>
+                <td><button class="delete-btn" onclick="deleteRow(this)">Delete</button></td>
+            </tr>
+            <tr>
+                <td>C004</td>
+                <td>Laura Murray</td>
+                <td>22-05-1985</td>
+                <td>364-656-8427</td>
+                <td>Laura_M@gmail.com</td>
+                <td>CHANDIGARH</td>
+                <td><button class="delete-btn" onclick="deleteRow(this)">Delete</button></td>
+            </tr>
+            <tr>
+                <td>C005</td>
+                <td>Linda Hines</td>
+                <td>18-04-1990</td>
+                <td>713-226-5883</td>
+                <td>LHines@verizon.com</td>
+                <td>CHANDIGARH</td>
+                <td><button class="delete-btn" onclick="deleteRow(this)">Delete</button></td>
+            </tr>
+            <tr>
+                <td>C006</td>
+                <td>Jasmine Fletcher</td>
+                <td>07-05-1951</td>
+                <td>190-271-6743</td>
+                <td>JFletcher43@xfinity.com</td>
+                <td>CHANDIGARH</td>
+                <td><button class="delete-btn" onclick="deleteRow(this)">Delete</button></td>
+            </tr>
+            <tr>
+                <td>C007</td>
+                <td>Dylan Rangel</td>
+                <td>06-05-1973</td>
+                <td>420-332-5209</td>
+                <td>Rangel.Dylan@comcast.net</td>
+                <td>DELHI</td>
+                <td><button class="delete-btn" onclick="deleteRow(this)">Delete</button></td>
+            </tr>
+            <tr>
+                <td>C008</td>
+                <td>William Velez</td>
+                <td>13-12-1944</td>
+                <td>286-669-4333</td>
+                <td>Velez_William@mail.com</td>
+                <td>DELHI</td>
+                <td><button class="delete-btn" onclick="deleteRow(this)">Delete</button></td>
+            </tr>
+            <tr>
+                <td>C009</td>
+                <td>Steven Murphy</td>
+                <td>20-07-1970</td>
+                <td>341-726-5787</td>
+                <td>Steven.Murphy54@aol.com</td>
+                <td>DELHI</td>
+                <td><button class="delete-btn" onclick="deleteRow(this)">Delete</button></td>
+            </tr>
+            <tr>
+                <td>C010</td>
+                <td>Michael Moore</td>
+                <td>19-10-2000</td>
+                <td>316-648-6176</td>
+                <td>MichaelMoore81@outlook.com</td>
+                <td>DELHI</td>
+                <td><button class="delete-btn" onclick="deleteRow(this)">Delete</button></td>
+            </tr>
+            <tr>
+                <td>C011</td>
+                <td>Priscilla Collins PhD</td>
+                <td>13-01-2021</td>
+                <td>833-887-7898</td>
+                <td>PhD.Priscilla74@att.com</td>
+                <td>DELHI</td>
+                <td><button class="delete-btn" onclick="deleteRow(this)">Delete</button></td>
+            </tr>
+            <tr>
+                <td>C012</td>
+                <td>Laurie Smith</td>
+                <td>14-12-1967</td>
+                <td>804-383-4080</td>
+                <td>Smith.Laurie@att.com</td>
+                <td>DELHI</td>
+                <td><button class="delete-btn" onclick="deleteRow(this)">Delete</button></td>
+            </tr>
+
+            <td>C013</td>
+            <td>Casey Thomas</td>
+            <td>03-07-1961</td>
+            <td>211-071-2173</td>
+            <td>Casey_T78@outlook.com</td>
+            <td>USA</td>
+            <td><button class="delete-btn" onclick="deleteRow(this)">Delete</button></td>
+            </tr>
+            <tr>
+                <td>C014</td>
+                <td>Rachel Friedman</td>
+                <td>11-04-1970</td>
+                <td>435-075-8409</td>
+                <td>Rachel.F@protonmail.com</td>
+                <td>UTTRAKHAND</td>
+                <td><button class="delete-btn" onclick="deleteRow(this)">Delete</button></td>
+            </tr>
+            <tr>
+                <td>C015</td>
+                <td>Edward Torres</td>
+                <td>11-08-1965</td>
+                <td>790-746-7471</td>
+                <td>Edward.T@zoho.com</td>
+                <td>DELHI</td>
+                <td><button class="delete-btn" onclick="deleteRow(this)">Delete</button></td>
+            </tr>
+            <tr>
+                <td>C066</td>
+                <td>Christopher Cabrera</td>
+                <td>23-06-2012</td>
+                <td>852-612-3076</td>
+                <td>Cabrera.Christopher@yahoo.com</td>
+                <td>USA</td>
+                <td><button class="delete-btn" onclick="deleteRow(this)">Delete</button></td>
+            </tr>
+            <tr>
+                <td>C067</td>
+                <td>Melinda Flores</td>
+                <td>30-10-1998</td>
+                <td>419-443-6780</td>
+                <td>Flores_Melinda@yahoo.com</td>
+                <td>UTTRAKHAND</td>
+                <td><button class="delete-btn" onclick="deleteRow(this)">Delete</button></td>
+            </tr>
+            <tr>
+                <td>C068</td>
+                <td>Michael Whitehead</td>
+                <td>01-04-1947</td>
+                <td>738-618-2202</td>
+                <td>Michael.W@mail.com</td>
+                <td>POL</td>
+                <td><button class="delete-btn" onclick="deleteRow(this)">Delete</button></td>
+            </tr>
+            <tr>
+                <td>C069</td>
+                <td>Brent Hamilton</td>
+                <td>15-12-1997</td>
+                <td>304-692-3370</td>
+                <td>Brent.Hamilton15@gmail.com</td>
+                <td>DELHI</td>
+                <td><button class="delete-btn" onclick="deleteRow(this)">Delete</button></td>
+            </tr>
+            <tr>
+                <td>C070</td>
+                <td>Jessica Bradford</td>
+                <td>20-03-1954</td>
+                <td>207-319-4187</td>
+                <td>JMADHYA PRADESHdford@outlook.com</td>
+                <td>DELHI</td>
+                <td><button class="delete-btn" onclick="deleteRow(this)">Delete</button></td>
+            </tr>
+            <tr>
+                <td>C071</td>
+                <td>Marissa Robinson</td>
+                <td>27-04-1983</td>
+                <td>770-855-7071</td>
+                <td>MarissaRobinson@mail.com</td>
+                <td>DELHI</td>
+                <td><button class="delete-btn" onclick="deleteRow(this)">Delete</button></td>
+            </tr>
+            <tr>
+                <td>C072</td>
+                <td>Jennifer Curry</td>
+                <td>09-02-1983</td>
+                <td>964-722-0569</td>
+                <td>Jennifer_Curry@hotmail.com</td>
+                <td>DELHI</td>
+                <td><button class="delete-btn" onclick="deleteRow(this)">Delete</button></td>
+            </tr>
+            <tr>
+                <td>C073</td>
+                <td>Teresa Maldonado</td>
+                <td>13-11-1953</td>
+                <td>623-086-5362</td>
+                <td>Maldonado_Teresa95@protonmail.com</td>
+                <td>DELHI</td>
+                <td><button class="delete-btn" onclick="deleteRow(this)">Delete</button></td>
+            </tr>
+            <tr>
+                <td>C074</td>
+                <td>Bryan Perez</td>
+                <td>10-08-1967</td>
+                <td>125-111-5926</td>
+                <td>BryanPerez@gmail.com</td>
+                <td>UTTRAKHAND</td>
+                <td><button class="delete-btn" onclick="deleteRow(this)">Delete</button></td>
+            </tr>
+            <tr>
+                <td>C075</td>
+                <td>Timothy Horn</td>
+                <td>08-10-1954</td>
+                <td>308-321-9169</td>
+                <td>Timothy.H@yandex.com</td>
+                <td>DELHI</td>
+                <td><button class="delete-btn" onclick="deleteRow(this)">Delete</button></td>
+            </tr>
+            <tr>
+                <td>C051</td>
+                <td>Rachel Ho</td>
+                <td>10/20/06</td>
+                <td>338-173-6502</td>
+                <td>Ho_Rachel74@aol.com</td>
+                <td>NOR</td>
+                <td><button class="delete-btn" onclick="deleteRow(this)">Delete</button></td>
+            </tr>
+            <tr>
+                <td>C052</td>
+                <td>Elizabeth Joseph</td>
+                <td>4/12/54</td>
+                <td>625-613-9890</td>
+                <td>Joseph_Elizabeth@yandex.com</td>
+                <td>MAHARASTHRA</td>
+                <td><button class="delete-btn" onclick="deleteRow(this)">Delete</button></td>
+            </tr>
+            <tr>
+                <td>C053</td>
+                <td>Stephen Brown</td>
+                <td>6/26/99</td>
+                <td>154-115-9953</td>
+                <td>Stephen.Brown@att.com</td>
+                <td>OMN</td>
+                <td><button class="delete-btn" onclick="deleteRow(this)">Delete</button></td>
+            </tr>
+            <tr>
+                <td>C054</td>
+                <td>Scott Ward</td>
+                <td>2/3/99</td>
+                <td>463-281-5751</td>
+                <td>Scott_Ward11@hotmail.com</td>
+                <td>UTTRAKHAND</td>
+                <td><button class="delete-btn" onclick="deleteRow(this)">Delete</button></td>
+            </tr>
+            <tr>
+                <td>C055</td>
+                <td>Derrick Bailey</td>
+                <td>6/12/52</td>
+                <td>709-066-0652</td>
+                <td>Derrick_Bailey@protonmail.com</td>
+                <td>ARG</td>
+                <td><button class="delete-btn" onclick="deleteRow(this)">Delete</button></td>
+            </tr>
+            <tr>
+                <td>C056</td>
+                <td>Jessica Cole</td>
+                <td>9/8/96</td>
+                <td>179-191-0924</td>
+                <td>Jessica_Cole@yahoo.com</td>
+                <td>UTTRAKHAND</td>
+                <td><button class="delete-btn" onclick="deleteRow(this)">Delete</button></td>
+            </tr>
+            <tr>
+                <td>C057</td>
+                <td>Reginald Russo</td>
+                <td>4/3/57</td>
+                <td>765-624-6051</td>
+                <td>Russo.Reginald65@comcast.net</td>
+                <td>DELHI</td>
+                <td><button class="delete-btn" onclick="deleteRow(this)">Delete</button></td>
+            </tr>
+            <tr>
+                <td>C058</td>
+                <td>William Sanchez</td>
+                <td>8/14/94</td>
+                <td>120-215-7905</td>
+                <td>William.Sanchez@mail.com</td>
+                <td>DELHI</td>
+                <td><button class="delete-btn" onclick="deleteRow(this)">Delete</button></td>
+            </tr>
+            <tr>
+                <td>C059</td>
+                <td>Diane Rose</td>
+                <td>8/1/09</td>
+                <td>362-196-5800</td>
+                <td>Diane.Rose@protonmail.com</td>
+                <td>DELHI</td>
+                <td><button class="delete-btn" onclick="deleteRow(this)">Delete</button></td>
+            </tr>
+            <tr>
+                <td>C060</td>
+                <td>Nathan Smith</td>
+                <td>3/31/80</td>
+                <td>689-649-9029</td>
+                <td>Nathan_Smith@comcast.net</td>
+                <td>USA</td>
+                <td><button class="delete-btn" onclick="deleteRow(this)">Delete</button></td>
+            </tr>
+        </tbody>
+    </table>
+
+    <button class="add-btn" onclick="openModal()">Add User</button>
+
+    <!-- Modal for user input -->
+    <div id="myModal" class="modal">
+        <div class="modal-content">
+            <span class="close-btn" onclick="closeModal()">Close</span>
+            <h2>Add Guest</h2>
+            <label for="id">ID:</label>
+            <input type="text" id="id" required><br>
+            <label for="name">Name:</label>
+            <input type="text" id="name" required><br>
+            <label for="dob">Date of Birth:</label>
+            <input type="text" id="dob" required><br>
+            <label for="phone">Phone Number:</label>
+            <input type="text" id="phone" required><br>
+            <label for="email">Email:</label>
+            <input type="text" id="email" required><br>
+            <label for="address">Address:</label>
+            <input type="text" id="address" required><br>
+            <button onclick="addUser()">Add User</button>
+        </div>
+    </div>
+
+    <script>
+        function deleteRow(button) {
+            var row = button.parentNode.parentNode;
+            row.parentNode.removeChild(row);
+        }
+
+        function openModal() {
+            document.getElementById("myModal").style.display = "flex";
+        }
+
+        function closeModal() {
+            document.getElementById("myModal").style.display = "none";
+        }
+
+        function addUser() {
+            var table = document.getElementById("userTable").getElementsByTagName('tbody')[0];
+            var newRow = table.insertRow(table.rows.length);
+
+            // Get user input data
+            var id = document.getElementById("id").value;
+            var name = document.getElementById("name").value;
+            var dob = document.getElementById("dob").value;
+            var phone = document.getElementById("phone").value;
+            var email = document.getElementById("email").value;
+            var address = document.getElementById("address").value;
+
+            var data = [id, name, dob, phone, email, address];
+
+            for (var i = 0; i < data.length; i++) {
+                var cell = newRow.insertCell(i);
+                cell.innerHTML = data[i];
+            }
+
+            var actionCell = newRow.insertCell(data.length);
+            var deleteBtn = document.createElement("button");
+            deleteBtn.className = "delete-btn";
+            deleteBtn.innerHTML = "Delete";
+            deleteBtn.onclick = function () {
+                deleteRow(this);
+            };
+            actionCell.appendChild(deleteBtn);
+
+            // Clear input fields and close modal
+            document.getElementById("id").value = "";
+            document.getElementById("name").value = "";
+            document.getElementById("dob").value = "";
+            document.getElementById("phone").value = "";
+            document.getElementById("email").value = "";
+            document.getElementById("address").value = "";
+
+            closeModal();
+        }
+    </script>
+
+</body>
+
+</html>
